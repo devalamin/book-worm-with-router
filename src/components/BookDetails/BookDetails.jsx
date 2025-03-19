@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { saveToLs, setWishToLs } from '../../utilities/AddToDb';
 
 const BookDetails = () => {
     const { bookId } = useParams()
@@ -16,7 +17,17 @@ const BookDetails = () => {
     })
     // console.log(bookWithId);
 
-    const { image, review, author, bookName, category, publisher } = bookWithId
+    const { image, bookId: newBookId, review, author, bookName, category, publisher } = bookWithId;
+
+
+    const handleMarkAsRead = (id) => {
+        saveToLs(id)
+    }
+
+    const handleWishList = (id) => {
+        setWishToLs(id)
+    }
+
     return (
         <div>
             <div className="card lg:card-side bg-base-100 shadow-sm">
@@ -30,8 +41,8 @@ const BookDetails = () => {
                     <p className='text-xl font-bold'>{author}</p>
                     <p>{review}</p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Read</button>
-                        <button className="btn btn-outline">Wishlist</button>
+                        <button onClick={() => handleMarkAsRead(newBookId)} className="btn btn-primary">Mark as Read</button>
+                        <button onClick={() => handleWishList(newBookId)} className="btn btn-outline">Wishlist</button>
                     </div>
                 </div>
             </div>
