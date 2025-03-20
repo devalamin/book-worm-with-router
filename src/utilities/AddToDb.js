@@ -50,11 +50,6 @@ const setWishToLs = (id) => {
 }
 
 
-const displayFromLs = () => {
-    const storedBooksId = getWishListItem()
-    return storedBooksId
 
 
-}
-
-export { saveToLs, setWishToLs, displayFromLs }
+export { saveToLs, setWishToLs, getWishListItem }
